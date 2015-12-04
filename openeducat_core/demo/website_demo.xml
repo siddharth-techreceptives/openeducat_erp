@@ -12,8 +12,12 @@
         </record>
 
         <template id="footer_default_openeducat" inherit_id="website.footer_default" customize_show="True" name="Automatic Footer">
-            <xpath expr="//div[@class='col-md-4 col-lg-5 col-lg-offset-1']/div" position="replace">
+            <xpath expr="//div[@class='col-md-5 col-lg-offset-1']/div" position="replace">
                 <div>
+                    <h4>
+                        <span t-field="res_company.name" />
+                        <small> - <a href="/page/website.aboutus">About us</a></small>
+                    </h4>
                     <p>
                         OpenEduCat is a product developed by Tech-Receptives
                         Solutions Pvt. Ltd., an expert company focusing in providing

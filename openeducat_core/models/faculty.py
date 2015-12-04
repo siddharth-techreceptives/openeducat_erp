@@ -46,7 +46,7 @@ class OpFaculty(models.Model):
     photo = fields.Binary('Photo')
     login = fields.Char(
         'Login', related='partner_id.user_id.login', readonly=1)
-    last_login = fields.Datetime(
+    last_login = fields.Date(
         'Latest Connection', related='partner_id.user_id.login_date',
         readonly=1)
     faculty_subject_ids = fields.Many2many('op.subject', string='Subject(s)')

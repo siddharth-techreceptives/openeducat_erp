@@ -20,7 +20,7 @@
 ###############################################################################
 
 from openerp import models, fields, api, _
-from openerp.exceptions import UserError, ValidationError
+from openerp.exceptions import ValidationError
 from ..models import book_unit
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
@@ -92,12 +92,12 @@ class IssueBook(models.TransientModel):
                 self.book_unit_id.state = 'issue'
                 value = {'type': 'ir.actions.act_window_close'}
             else:
-                raise UserError(_(
+                raise ValidationError(_(
                     "Book Unit can not be issued because it's state is : %s") %
                     (dict(book_unit.unit_states).get(
                         self.book_unit_id.state)))
         else:
-            raise UserError(_(
+            raise ValidationError(_(
                 'Maximum Number of book allowed for %s is : %s') %
                 (self.student_id.name,
                  self.library_card_id.library_card_type_id.allow_book))

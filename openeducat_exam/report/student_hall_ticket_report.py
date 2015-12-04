@@ -20,7 +20,7 @@
 ###############################################################################
 
 import time
-
+from openerp.osv import fields as FIELDS
 from openerp import models, fields
 from openerp.report import report_sxw
 
@@ -37,13 +37,16 @@ class StudentHallTicketReport(report_sxw.rml_parse):
         self._context = context
 
     def get_date(self, exam_line):
+        exam_start = FIELDS.datetime.context_timestamp(
+            self.cr, self.uid, fields.Datetime.from_string(
+                exam_line.start_time), context=None)
 
-        timestamp = fields.Datetime.context_timestamp
-        dt = fields.Datetime
-        schedule_start = timestamp(self, dt.from_string(exam_line.start_time))
-        schedule_end = timestamp(self, dt.from_string(exam_line.end_time))
-        schedule_start = fields.Datetime.to_string(schedule_start)
-        schedule_end = fields.Datetime.to_string(schedule_end)
+        exam_end = FIELDS.datetime.context_timestamp(
+            self.cr, self.uid, fields.Datetime.from_string(
+                exam_line.end_time), context=None)
+
+        schedule_start = fields.Datetime.to_string(exam_start)
+        schedule_end = fields.Datetime.to_string(exam_end)
 
         return schedule_start[11:] + ' To ' + schedule_end[11:]
 

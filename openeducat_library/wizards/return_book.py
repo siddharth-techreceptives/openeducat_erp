@@ -20,7 +20,7 @@
 ###############################################################################
 
 from openerp import models, fields, api, _
-from openerp.exceptions import UserError
+from openerp.exceptions import ValidationError
 from ..models import book_unit
 
 
@@ -50,7 +50,7 @@ class ReturnBook(models.TransientModel):
             book_move_search.state = 'return'
             self.book_unit_id.state = 'available'
         else:
-            raise UserError(_(
+            raise ValidationError(_(
                 "Book Unit can not be returned because it's state is : %s") %
                 (dict(book_unit.unit_states).get(self.book_unit_id.state)))
 
