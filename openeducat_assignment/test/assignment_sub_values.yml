@@ -61,7 +61,7 @@
 -
   !record {model: op.subject, id: subject_fa_test}:
     name: 'Financial Accounting'
-    code: 'BOA1-001t'
+    code: 'BOA1-001'
     type: 'theory'
 -
   I create 1st Partner for student
